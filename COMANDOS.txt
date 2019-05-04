@@ -1,0 +1,102 @@
+Comandos de Linux Básicos
+
+Ayuda
+help "Saca un listadpo de los comandos más habituales de linux"
+[comando] -help "muestra la ayuda del comando"
+[comando_con_sus_arumentos] |more "Sale la información pantalla a pantalla , usando enter para avanzar una línea
+                                   y barra espaciadora para avanzar una pantalla"
+man [argumento] [comando] "muestra la ayuda de un comando con más opciones que help"
+whatis [comando]
+
+
+
+
+Comandos de Archivos básicos
+clear "Borrar contenido de la pantalla"
+ls "Muestra el contenido de carpetas"
+pwd "Muestra la ruta o path de una carpeta"
+mv "Mueve archivos y carpetas" "tambien sirve para renombrar carpetas"
+mkdir "Crea una carpeta"
+cd "Cambia de carpeta"
+touch "Crea un archivo vacio"
+stat "muestra los atributos de los archivos y carpetas"
+rm -r "Borrar un archivo una carpeta"
+-----------------------------------------------------
+cp "Copia archivos y carpetas" -r "Copia subcarpetas"
+-----------------------------------------------------
+
+EDITORES DE TEXTOS
+nano "editor avanzado"
+vim "Editor de textos"
+
+
+NOTAS GENERALES
+
+1.- DIRECCIÓN DE CARPETAS
+"para indicar una carpeta en una carpeta en el directorio actual hay que terminar con /,
+o bien ./DIRECTORIO_APUNTADO si no se desea terminar con barra. Si es un comando como mv o cp (mover o copiar)
+el destino no es necesario poner más que el nombre y el dependiendo del origen si es una carpeta pues lo que hace
+es si no existe crear una carpeta imitando el mismo tipo de origen es decir carpeta.
+
+2.- Teclas rápidas:
+Alt + Tab "Muestra todos los comandos ejecutados"
+
+
+
+
+Comandos de usuarios:
+sudo [comando] "Se utiliza para iniciar un comando en modo administrador, con sudo tambien se puede iniciar un usuario".
+
+
+Comandos para Actualizar Linux:
+
+apt [comando] "Se utiliza para la administración de paquetes de instalación
+               dandole con sudo privilegios de administrador"
+apt 
+
+
+ARCHIVOS DE CONFIGURACIÓN DE RED - NUESTRO ADAPTADOR -
+	"primero vemos los adaptadores que existen con el comando:"
+ifconfig -a "Si no funcionase instalamos el paquete : sudo apt install net-tools. apuntamos el listado de adatadores "
+	"editamos el archivo de inicio de configuración del adaptador de red"
+sudo nano /etc/network/interfaces "eth0 es el adaptador a cambiar lo sustituimos por el que deseamos 
+                                   del listado anterior como por ejemplo enp0s3"
+-------------------------------	
+	auto eth0
+		iface eth0 inet static
+		address 192.168.1.33
+		netmask 255.255.255.0
+		broadcast 192.168.1.255
+		gateway 192.168.1.1
+------------------------------
+sudo nano /etc/resolv.conf "Para cambiar la DNS"
+----
+	"se debe preguntar a nuestro proveedor de servicio si no vale con la puerta de enlace"
+nameserver 192.168.1.1 
+----
+	"reiniciamos los adaptadores"
+sudo /etc/init.d/networking restart
+----
+	"probamos conexiones puerta de enlace y con Internet 8.8.8.8"
+ping 192.168.1.1  -c 3    " y   8.8.8.8
+------
+	"añadir al archivo "
+/etc/resolv.conf
+nameserver 8.8.8.8
+
+
+	
+COMANDO DE REINICIO - APAGAR - SUSPENDER -
+shutdown -r now "reiniciar ahora"
+poweroff "apagar equipo"
+logout "salir de la sesión"
+
+
+
+CONFIGURAR TECLADO 
+	"Elegir teclado"
+sudo dpkg-reconfigure keyboard-configuration
+	"El truco aquí es ir a elegir en la primera pantalla de 
+	selección Generic 102 (intl) keyboard, tras lo cual nos 
+	preguntara el origen del teclado y podremos elegir Spain."
+
